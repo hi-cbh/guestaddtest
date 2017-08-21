@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/version_manage/">Guest Manage System</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          	<li><a href="/event_manage/">发布会</a></li>
+            <li><a href="/guest_manage/">嘉宾</a></li>
+            <li><a href="/version_manage/">测试版本</a></li>
+            <li class="active"><a href="#">结果汇总</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+           <li><a href="#">{{user}}</a></li>
+           <li><a href="/logout/">退出</a></li>
+         </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <!--发布会表单-->
+      <div class="page-header" >
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form" method="get" action="/search_result/">
+            <div class="form-group">
+              <input name="versionID" type="text" placeholder="版本ID" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">搜索</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+
+      <div class="row" style="Padding-top: 10px;">
+        <div class="col-md-6">
+          <table class="table table-striped" style="width: 1200px;">
+            <thead>
+              <tr>
+                <th>产品</th>
+                <th>版本ID</th>
+                <th>网络状态</th>
+                <th>登录时延</th>
+                <th>接收本域邮件时延</th>
+                <th>打开未读邮件时延</th>
+                <th>下载附件时延</th>
+                <th>发送邮件时延</th>
+                <th>首次登录流量</th>                
+                <th>空刷流量</th>
+                <th>待机无邮件电量</th>
+                <th>待机无邮件流量</th>
+                <th>待机有邮件电量</th>
+                <th>待机有邮件流量</th>                
+                <th>业务运行内存峰值</th>
+                <th>CPU峰值</th>                    
+                <th>待机平均内存</th>
+                <th>杀进程启动时间</th>                       
+                <th>详情</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for result in results %}
+                <tr>
+                  <td>{{ result.productName }}</td>
+                  <td>{{ result.versionID }}</td>
+                  <td>{{ result.networkType }}</td>
+                  <td>{{ result.logintime }}</td>
+                  <td>{{ result.receivetime }}</td>
+                  <td>{{ result.readtime }}</td>
+                  <td>{{ result.downtime }}</td>
+                  <td>{{ result.sendtime }}</td>
+                  <td>{{ result.loginflow }}</td>
+                  <td>{{ result.brushflow }}</td>
+                  <td>{{ result.standynoelectric }}</td>
+                  <td>{{ result.standynoflow }}</td>
+                  <td>{{ result.standyelectric }}</td>
+                  <td>{{ result.standyflow }}</td>
+                  <td>{{ result.maxmem }}</td>
+                  <td>{{ result.maxcpu }}</td>
+                  <td>{{ result.avgmem }}</td>
+                  <td>{{ result.avgtime }}</td>                                   
+                  <td><a href="/result_index/{{ result.versionID }}/"  target="{{ event.id }}_blank">转</a></td>
+               
+                </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+{% endblock %}
