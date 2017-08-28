@@ -29,5 +29,5 @@ class ResultAdmin(admin.ModelAdmin):
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Guest, GuestAdmin)
-admin.site.register(Version, VersionAdmin)
-admin.site.register(Result, ResultAdmin)
+# admin.site.register(Version, VersionAdmin)
+# admin.site.register(Result, ResultAdmin)
